@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "marimo>=0.23.6",
+    "numpy>=2.4.5",
+    "pandas>=3.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "dvc>=3.67.1",
+    "ruff>=0.15.13",
+]
