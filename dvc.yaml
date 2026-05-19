@@ -5,3 +5,10 @@ stages:
     - src/clean.py
     outs:
     - data/clean/events.csv
+  transform:
+    cmd: python3 src/transform.py data/clean/events.csv
+    deps:
+    - data/clean/events.csv
+    - src/transform.py
+    outs:
+    - data/transformed/events.csv
