@@ -14,7 +14,7 @@ def clean_events(input_path: Path) -> None:
     df = df.dropna()
 
     # remove invalid event type
-    df = df[df["event_type"] != "unknown"]
+    df = df[df["event_type"].isin(["click", "login", "scroll", "view", "purchase"])]
 
     # remove non-positive durations
     df = df[df["duration_seconds"] > 0]
