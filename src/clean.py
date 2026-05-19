@@ -18,6 +18,7 @@ def clean_events(input_path: Path) -> None:
 
     # remove non-positive durations
     df = df[df["duration_seconds"] > 0]
+    df["duration_seconds"] = df["duration_seconds"].astype(int)
 
     # normalize timestamps to ISO 8601
     df["timestamp"] = pd.to_datetime(
