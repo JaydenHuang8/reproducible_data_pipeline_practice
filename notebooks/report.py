@@ -11,43 +11,22 @@ def _():
     import matplotlib.pyplot as plt
     from pathlib import Path
 
-    return Path, pd
+    return Path, pd, plt
 
 
 @app.cell
-def _(Path, pd):
-    csv_path = Path("../data/raw/events.csv")
+def _(Path, pd, plt):
+    csv_path = Path("../data/features/events.csv")
 
     df = pd.read_csv(csv_path)
 
-    #
-    df = df.dropna()
+    plt.hist(df['duration_minutes'])
 
-    # remove invalid event type
-    df = df[df["event_type"] != "unknown"]
+    plt.xlabel("Minutes")
+    plt.ylabel("Frequency")
+    plt.title("Duration of Events")
 
-    # rm non positive duration
-    df = df[df["duration_seconds"] > 0]
-
-    # convert to ISO 8601 string format
-    df["timestamp"] = pd.to_datetime(df["timestamp"], format="mixed").dt.strftime("%Y-%m-%dT%H:%M:%S")
-
-    #Transforming
-    df["date"] = pd.to_datetime(df["timestamp"]).dt.strftime("%Y-%m-%d")
-
-    df
-    return
-
-
-@app.cell
-def _(Path, pd):
-    df2 = pd.read_csv(Path("../data/transformed/events.csv"))
-
-    df2["duration_minutes"] = df2["duration_seconds"] / 60
-
-    df2["weekday"] = pd.to_datetime(df2["date"]).dt.day_name()
-
-    df2
+    plt.show()
     return
 
 
